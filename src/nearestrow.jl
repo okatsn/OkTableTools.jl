@@ -13,10 +13,18 @@ end
 function sortbydist(df::AbstractDataFrame, cols::Cols, vals)
     cs = _selectcol(df, cols)
     diffs = [val .- v for ((k, v), val) in zip(pairs(cs), vals)]
-    dists = [v for v in zip(diffs...)] .|> norm
+    dists = [collect(v) for v in zip(diffs...)] .|> _getnorm
     ids = sortperm(dists)
     # dfv = @view df[ids, :]
     return (df[ids, :], ids)
+end
+
+function _getnorm(v::Vector{T}) where T<:Real
+    norm(v)
+end
+
+function _getnorm(v::Vector{<:TimePeriod})
+    norm([val.value for val in v])
 end
 
 

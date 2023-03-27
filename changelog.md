@@ -8,3 +8,6 @@
 - New `sortbydist` 
 - Unify UI of the `nearestrow` family 
 - Basic tests passed
+
+## v0.1.2
+- `sortbydist` now supports `TimePeriod` distances
