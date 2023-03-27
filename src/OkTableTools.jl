@@ -4,5 +4,5 @@ module OkTableTools
 using LinearAlgebra, DataFrames
 include("nearestrow.jl")
 export nearestrow, nearestrows
-
+export sortbydist
 end

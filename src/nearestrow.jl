@@ -7,9 +7,16 @@ function _selectcol(df, cols::Cols)
     eachcol(df[!, cols])
 end
 
-function nearestrows(df::AbstractDataFrame, cols::Cols, vals)
+"""
+`sortbydist(df::AbstractDataFrame, cols::Cols, vals)` sort `df` by the distances between scalar `value` and vector `variable` for `value` in `vals` and `variable` in `eachcol(df[!, cols])`.
+"""
+function sortbydist(df::AbstractDataFrame, cols::Cols, vals)
     cs = _selectcol(df, cols)
     diffs = [val .- v for ((k, v), val) in zip(pairs(cs), vals)]
+    dists = [v for v in zip(diffs...)] .|> norm
+    ids = sortperm(dists)
+    # dfv = @view df[ids, :]
+    return (df[ids, :], ids)
 end
 
 
