@@ -35,6 +35,18 @@ using DataFrames
         @test dataframes_equal(df1, df4) == false
     end
 
+    @testset "Nothing values" begin
+        df1 = DataFrame(a=[1, 2, 3], b=[4.0, nothing, 6.0])
+        df2 = DataFrame(a=[1, 2, 3], b=[4.0, nothing, 6.0])
+        @test dataframes_equal(df1, df2) == true
+
+        df3 = DataFrame(a=[1, 2, 3], b=[4.0, 5.0, 6.0])
+        @test dataframes_equal(df1, df3) == false
+
+        df4 = DataFrame(a=[1, 2, 3], b=[4.0, NaN, 6.0])
+        @test dataframes_equal(df1, df4) == false
+    end
+
     @testset "Different number of rows" begin
         df1 = DataFrame(a=[1, 2, 3], b=[4.0, 5.0, 6.0])
         df2 = DataFrame(a=[1, 2], b=[4.0, 5.0])

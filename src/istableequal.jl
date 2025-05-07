@@ -52,6 +52,10 @@ function dataframes_equal(df1, df2)
                 return ismissing(v1) && ismissing(v2)
             end
 
+            if isnothing(v1) || isnothing(v2)
+                return isnothing(v1) && isnothing(v2)
+            end
+
             if v1 != v2 # if either is missing, error returned.
                 if isnan(v1) && isnan(v2)
                     # pass
