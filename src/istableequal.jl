@@ -47,10 +47,17 @@ function dataframes_equal(df1, df2)
         for i in 1:nrow(df1)
             v1 = df1[i, col]
             v2 = df2[i, col]
-            if v1 != v2
+
+            if ismissing(v1) || ismissing(v2)
+                return ismissing(v1) && ismissing(v2)
+            end
+
+            if isnothing(v1) || isnothing(v2)
+                return isnothing(v1) && isnothing(v2)
+            end
+
+            if v1 != v2 # if either is missing, error returned.
                 if isnan(v1) && isnan(v2)
-                    # pass
-                elseif ismissing(v1) == ismissing(v2)
                     # pass
                 else
                     @warn "At column $col of row $i, the element is not equal ($v1 != $v2)"

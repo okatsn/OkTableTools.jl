@@ -1,7 +1,7 @@
 name = "OkTableTools"
 uuid = "42c3750f-3b15-406e-9cb1-f05d2df8c96f"
 authors = ["okatsn <okatsn@gmail.com> and contributors"]
-version = "0.1.3"
+version = "0.1.4"
 
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
